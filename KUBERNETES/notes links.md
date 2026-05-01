@@ -1,0 +1,1 @@
+https://www.stephenzoio.com/kubernetes-operators-for-resource-management/

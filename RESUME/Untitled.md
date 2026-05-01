@@ -1,0 +1,3 @@
+	I come from a development and ETL background, with strong foundations in C, C++, Java, Visual Basic, and Oracle. My work shaped my thinking around debugging, data flow, system behavior, and production stability rather than just writing code.
+
+That naturally led me toward DevOps, cloud infrastructure, and reliability engineering—where understanding how systems fail matters as much as building them.

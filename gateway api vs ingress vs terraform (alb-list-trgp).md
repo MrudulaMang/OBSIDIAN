@@ -22,12 +22,12 @@ The cost trap nobody budgets for:
 
 The failure modes tell the real story:
 
-→ Ingress fails silently — hard to catch, expensive to debug
-
-→ Gateway API fails structurally — louder, but catchable with good policy
-
-→ Terraform fails operationally — human process failures, not code failures
-
+		→ Ingress fails silently — hard to catch, expensive to debug
+		
+		→ Gateway API fails structurally — louder, but catchable with good policy
+		
+		→ Terraform fails operationally — human process failures, not code failures
+	
 The question I ask teams now isn't "which is better."
 
 It's: where do you want your complexity to live — and who owns it when things go wrong?
