@@ -190,3 +190,20 @@ git push -u origin main
     
 
 ---
+git checkout <commit_id>
+git switch --detach <commit_id>
+git reset --hard <commit_id>
+“Can I revert commits between commit A and commit B, not just HEAD → A?”
+		Answer: yes, with:
+		git revert A^..B
+---
+copy only isngle foldre from a REPO
+	git sparse-checkout set roboshop-infra-eks/31-cicd-tools
+	ls
+	git branch -a
+	cd  roboshop-infra-eks  
+	git sparse-checkout set 31-cicd-tools
+	git sparse-checkout list
+	ls
+	cd 31-cicd-tools
+	 ls

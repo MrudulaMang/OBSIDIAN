@@ -1,0 +1,1 @@
+give me detailed flow of ci/cd step by step usign jenkins for roboshop project, in every aspecct that is covered from version scans image building, branch strategy, jira, testing, uat prod CR... and whatever u can think of. in all environments
