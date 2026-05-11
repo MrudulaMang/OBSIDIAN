@@ -197,7 +197,7 @@ git reset --hard <commit_id>
 		Answer: yes, with:
 		git revert A^..B
 ---
-copy only isngle foldre from a REPO
+copy only single folder from a REPO
 	git sparse-checkout set roboshop-infra-eks/31-cicd-tools
 	ls
 	git branch -a
@@ -207,3 +207,18 @@ copy only isngle foldre from a REPO
 	ls
 	cd 31-cicd-tools
 	 ls
+copy one repo from one github acct to another
+git clone https://github.com/daws-88s/catalogue-unit-tests.git
+   5        0.017 cd catalogue-unit-tests
+   6        0.094 git remote set-url origin https://github.com/MrudulaMang/catalogue-unit-tests.git
+   7        0.083 git remote -v
+   8        1.637 git add .; git commit -m "jenkin unit tests"; git push origin main
+
+-------------
+ git config --list
+
+---Git commit identity
+git config user.name
+git config user.email
+
+ssh -T git@github.com ---This shows which GitHub account is authenticated.

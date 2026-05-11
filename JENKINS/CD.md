@@ -1,4 +1,4 @@
-what is cd
+The goal is to treat your pipeline like a living system—always evolving based on real outcomes. So next time, ask yourself: What did production teach me, and how will my next deployment be stronger for it?what is cd
 
 CD means either:
 
