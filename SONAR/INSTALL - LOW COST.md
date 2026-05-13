@@ -1,3 +1,100 @@
+Why SonarQube should use PostgreSQL instead of only embedded storage
+Because SonarQube is not meant to use its embedded database for real usage.
+
+The embedded DB is mainly for evaluation/testing, not serious operation.
+
+Why PostgreSQL:
+
+1. Persistence reliability
+
+Embedded storage is weak for long-term use.
+
+With PostgreSQL:
+
+- proper transactions
+- durability
+- consistency
+- recovery behavior
+
+much safer.
+
+---
+
+2. Production support
+
+SonarQube officially expects an external supported database like PostgreSQL.
+
+For real teams, upgrades, backups, and scaling depend on that.
+
+Embedded DB is not the production path.
+
+---
+
+3. Backup and restore
+
+With PostgreSQL:
+
+```
+pg_dumprestorereplicationsnapshots
+```
+
+all become manageable.
+
+With embedded DB, recovery becomes ugly.
+
+---
+
+4. Performance
+
+As projects, scans, issues, and history grow:
+
+- analysis data
+- quality gates
+- vulnerabilities
+- branch history
+- pull request reports
+
+database load grows fast.
+
+PostgreSQL handles that properly.
+
+Embedded DB becomes fragile.
+
+---
+
+5. Separation of concerns
+
+Application and database should not be tightly mixed.
+
+Better architecture:
+
+```
+SonarQube = applicationPostgreSQL = state
+```
+
+not
+
+```
+everything inside one container
+```
+
+because replacement becomes easier.
+
+Destroy app container → DB survives.
+
+---
+
+Hard truth:
+
+Most beginners use embedded DB because it starts faster.
+
+That is convenience thinking.
+
+DevOps should train operational thinking:
+
+“How do I restore this at 2 AM after failure?”
+
+That question usually kills embedded DB designs immediately.
 cheapest way to practice soanrqube
 
 Cheapest way to practice SonarQube is not “deploy full enterprise architecture.”  
@@ -106,3 +203,68 @@ Most juniors say yes.
 That answer is often wrong.
 
 Think before replying.
+-----------------
+If SonarQube says “Quality Gate Failed,” should deployment always stop?.
+
+No—“always stop” is lazy thinking. The real question is: _what kind of failure, in which environment, with what business risk?_
+
+Treating every Quality Gate failure as an absolute deployment blocker can be as bad as ignoring it.
+
+SonarQube evaluates things like bugs, vulnerabilities, code smells, coverage, duplication, and policy thresholds. A failed gate could mean:
+
+1. Critical security vulnerability → likely must stop
+2. Major bug risk → usually should stop
+3. Coverage dropped from 81% to 79% → maybe not worth blocking production
+4. Legacy code smell count exists from old code → often should not block urgent hotfixes
+
+The mature approach is environment-based governance:
+
+Dev / Feature branches  
+Usually warn, don’t block. Developers need speed.
+
+QA / Staging  
+Often soft-block or require approval.
+
+Production  
+Critical issues should hard-block. Cosmetic failures should not become business outages.
+
+A stronger rule is:
+
+**Block on new critical risk, not historical imperfection.**
+
+This is why many teams use “Clean as You Code” in [SonarQube](https://www.sonarsource.com/products/sonarqube/?utm_source=chatgpt.com)—focus on new code quality rather than freezing delivery because of old technical debt.
+
+Bad DevOps teams say:  
+“Gate failed, pipeline stopped.”
+
+Good DevOps teams ask:  
+“What risk are we preventing?”
+
+Best teams ask:  
+“What is the opportunity cost of blocking vs shipping?”
+
+Because stopping deployment also has a cost:
+
+- delayed revenue
+- delayed bug fixes
+- delayed incident recovery
+- operational bottlenecks
+- developer distrust in the pipeline
+
+If your pipeline blocks on trivial failures, engineers will start bypassing the pipeline. Then governance is dead.
+
+Better policy example:
+
+- Security rating < A → block
+- New blocker/critical bugs > 0 → block
+- Coverage drop > threshold → approval needed
+- Minor code smells → notify only
+
+So the correct answer in interviews is:
+
+“Deployment should not always stop. It should stop for risk-significant failures based on policy, environment, and business criticality—not for every failed metric.”
+
+If you say “yes, always stop,” you sound inexperienced.  
+If you say “no, never stop,” you sound reckless.
+
+The right answer is controlled judgment.

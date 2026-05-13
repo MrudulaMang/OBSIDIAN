@@ -222,3 +222,19 @@ git config user.name
 git config user.email
 
 ssh -T git@github.com ---This shows which GitHub account is authenticated.
+
+-----------------------------------------------------
+
+Your local folder and the new GitHub repo are separate histories. “Merge” means connecting the local folder to the remote repo and pushing your code.
+
+If your local folder is not yet a Git repo:
+
+```
+cd your-folder
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin <your-github-repo-url>
+git push -u origin main
+```
