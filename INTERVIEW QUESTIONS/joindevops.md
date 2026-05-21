@@ -917,3 +917,275 @@ Kubernetes is not able to expose a pod — what could be the possible issues?
 - _Security best practices_
 
 **Hope this helps anyone preparing for Senior DevOps interviews**
+
+----------------------
+## APR 30TH TO MAY 20TH
+
+What is SonarQube and why is it used?  
+What is code quality in SonarQube?  
+What is code coverage?  
+What are bugs, vulnerabilities, and code smells?  
+What is a quality gate in SonarQube?  
+What is a quality profile?  
+How does SonarQube integrate with CI/CD pipelines?  
+How do you scan code using SonarQube?  
+What is Sonar Scanner?  
+What is the difference between unit test coverage and code coverage?  
+How do you fix issues reported by SonarQube?  
+What are rules in SonarQube?  
+How do you configure SonarQube for a project?  
+What are common SonarQube issues?  
+How do you troubleshoot scan failures?  
+How do you improve code quality using SonarQube?  
+How do you integrate SonarQube with Jenkins?  
+What are best practices for SonarQube?  
+How do you secure SonarQube?  
+How do you manage multiple projects in SonarQube?
+
+Virtusa interview questions L1 round:  
+
+1. how do you manage terraform secrets and in kubernetes?
+2. what is federated clusters in kubernetes?
+3. write depolyment and svc manifest files replica count shoulb be 5 and nginx as image?
+4. what are services in k8s?how many types?
+5. what are labels and selectors?
+6. write a command to create workspace in terraform?
+7. could you briefly explain about ci/cd workflow?
+8. what are observability tools you worked on?
+9. what is headless services which resource it will use?
+10. what is deamonset in K8s?explian it?
+11. what are requests and limit throttles?how throttle happens in request and limits?
+12. what is valut? what are steps you do to integrate secrets in hashicrop vaults?
+13. what is kafka ?do you know about kafka? ( this question is repeted for three interviews to me)
+14. how will you integrate k8s deploymnets in jenkins?
+15. what is statefulset in k8s?
+16. how do you integrate sonarqube in jenkins?
+
+Tcs L1 interview question for Kubernetes  
+  
+what is the biggest challenge you have face in Kubernetes?how do you fix it?  
+how do you handle memory issue size unavailable in docker?  
+docker builds is failing due memory issue?  
+how do you reduce size of docker image?  
+pop to pod communication is failing how do you fix it why?  
+if you not define limits in the deployments or resource configuration what happens?  
+you have deployment it has 10 replicas desired capacity CPU utilization 80% your cpu utilization is 85% HPA should auto scale butHPA is not working?  
+what are network polices how to you troubleshoot it?  
+what is 503 error how do you fix in k8s?  
+write bash script to check services and restart the containers in using the script?
+
+Infosys L1 Interview questions  
+  
+1) how could four organisation in GitHub actions  can reuse the code example abc ,cocacola,pepesi,xyz company?  
+2) how do you mange terrafoem secrets if you have given value like password and key .specified using genric in the interview?  
+3) s3 bucket is deleted manuall in portal aws?what are the two places it is impacted in terraform?  
+4) AWS= accounted passwords is compromised what are steps you take ?  
+5) nested module  
+  
+   module {  
+  
+   module 1{  
+    data1 = jbjbxjb  
+    data = hvahvs  
+}  
+  
+ module 2 {  
+  data =nbbxxj  
+  data 3 = ujkdkj  
+}  
+}  
+  
+is this module syntax is correct can module is nested justify ?if yes how if no how ?  
+  
+6)  ansible inventory file  
+  
+     inventory.ini  
+   [db]  
+   srver 1  
+   server2  
+   [prod]  
+   server  
+   server 3  
+   [dev]  
+   sevrer 4  
+  
+   if i execute playbook of the inventory what happens does all servers in ini will be executed?  
+  
+  playbook.yaml  
+  
+  - host:[prod, all]  
+ now what happens if i excute this playbook?  
+  
+1) what are workflow or pipelines you have build in your previous project could me explain about that?
+
+Capgemini L2 interview questions.  
+what are provisioners in terraform?  
+Explain dynamic block code and explain with example?  
+what are svc in Kubernetes how it communicates in realtime?  
+how do you achieve zero downtime in terraform?  
+Kubernetes deploy how do you update manifest files in Jenkins deploy pipeline?  
+vpc is created manually in terraform how do you configure in terraform?  
+crashloopbackoff explain?  
+how do you start backend pod first and then frontend pod in k8s?walk me through steps?  
+what are rolling update startgey? what deployment strategy you follow in your organisation?
+
+Explain about your project.  
+What is the docker and why we use docker and explain about architecture.  
+After docker why we choose kubernetes and what are the advantages  
+Dockerfile for python.  
+What is difference between CMD AND ENTRY POINT.  
+How you configure security for pods  
+What is irsa and RBAC  
+Service is slow what would be the possible reason can you explain  
+Podcrashloopbackoff and can you explain backoff.  
+Liveness and readiness.  
+What is terraform and do you implemented any things  
+What is terraform state and why we use remote backend.  
+What are modules and why we use it.  
+What is data source and what are the functions in terraform.  
+Explain cicd pipeline and write the syntax for that pipeline.  
+Did you worked on on-prem and did you involved in any migration activities.  
+How many clusters and what all environments you managed.  
+Write a bash script for taking backups.  
+What is load balancer  and in AWS how many types of load balancers and have you worked on any.  
+What is s3 and have you set up anything related to s3 from scratch.  
+What is pipelines failed generally what all issues you faced.  
+How webhook is configured ?  
+What issues you faced in setting up the infrastructure.  
+Can you explain about how you created the infrastructure from scratch and need the application be available for 24*7 what would your approach.  
+  
+Hi Team, just now I finished my first round of interview in Ipsator company banglore.
+
+**Recently gathered a set of DevOps Technical Interview Questions (L1 Level)**  
+  
+![:one:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/0031-fe0f-20e3@2x.png) Introduction & Project Experience  
+
+- Self introduction
+- Explain your project/work experience
+
+  
+  
+![:wheel_of_dharma:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/2638-fe0f@2x.png) Kubernetes  
+**Architecture & Core Concepts**  
+
+- Define Pod lifecycle
+- Explain Kubernetes architecture
+- Difference between **Deployment** and **StatefulSet**
+- Difference between **Persistent Volume (PV)** and **Persistent Volume Claim (PVC)**
+- Which one is static and which one is dynamic in **PV & PVC**?
+- Difference between **Ingress Controller** and **Load Balancer**
+
+  
+  
+![:herb:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/1f33f@2x.png) Git & Version Control  
+
+- Difference between **git pull** and **git fetch**
+- When do we use **Snapshot version** and **Release version**?
+
+  
+  
+![:building_construction:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/1f3d7-fe0f@2x.png) Terraform  
+
+- What is Terraform?
+- What is a **Terraform state file**?
+- How to recover a corrupted state file?
+- Difference between **for_each** and **count**
+- Types of modules in Terraform
+- How do you lock a state file?
+
+  
+  
+![:whale:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/1f433@2x.png) Docker  
+
+- What is Docker?
+- Write a **Dockerfile for a Java application**
+- Types of networking in Docker
+- Difference between **COPY** and **ADD** in Dockerfile
+
+  
+  
+![:cloud:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/2601-fe0f@2x.png) AWS & Cloud  
+
+- What is AWS?
+- What is **IAM**? Explain different IAM roles
+- Types of **Load Balancers** in AWS
+- What is the **maximum size of an S3 object**?
+
+  
+  
+![:wrench:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/1f527@2x.png) Jenkins & CI/CD  
+
+- What are the various **pipeline stages in a Jenkinsfile**?
+
+  
+  
+![:hammer_and_wrench:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/1f6e0-fe0f@2x.png) Troubleshooting & Real-Time Scenarios  
+**Scenario 1:**  
+The application is up and running but **not accessible from the public internet** — how would you troubleshoot?  
+**Scenario 2:**  
+An **EC2 instance** is deployed with all required dependencies, but it is **not accessible** — how would you troubleshoot?  
+  
+![:bulb:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/google-medium/1f4a1@2x.png) Hope this helps in your interview preparation. Feel free to add more questions if you’ve recently attended interviews!
+
+LTM interview questions :  
+
+- How do you write Terraform code to create a Virtual Network (VNet) in Azure?
+- What is a Terraform state file, and why is it important?
+- How do you unlock a Terraform state file when another user is already working on it?
+- What are implicit and explicit dependencies in Terraform? Can you explain with examples?
+- What is the difference between `count` and `for_each` in Terraform?
+- What are parent modules and child modules in Terraform?
+- How do you create infrastructure in multiple locations/regions using Terraform?
+- What is an artifact in DevOps or CI/CD pipelines?
+- How do you set up a Kubernetes cluster from scratch?
+- What are the best practices you implemented in your last DevOps project?
+- How do you manage Terraform remote backend and state locking in a team environment?
+
+
+Mphasis L1 round  
+  
+
+1. What is Ingress in Kubernetes?
+2. How is Ingress different from a Service (NodePort / LoadBalancer)?
+3. How does Ingress handle HTTP vs HTTPS routing?
+4. What is an SSL/TLS certificate, and how is it used in Ingress?
+5. What is an Ingress Controller? Can Kubernetes Ingress work without it?
+6. How do you configure host-based routing in Ingress?
+7. What is path-based routing in Ingress?
+8. What are Network Policies in Kubernetes?
+9. How do Network Policies control pod-to-pod communication?
+10. Difference between Network Policies and Firewall rules?
+11. What is the role of gateways in Kubernetes networking?
+12. How do you restrict a pod to access only specific external APIs?
+13. What metrics can be monitored in Kubernetes?
+14. How do you monitor CPU and memory usage of pods?
+15. What is Prometheus and how is it used in Kubernetes?
+16. What is Grafana and how does it integrate with Prometheus?
+17. How do you configure alerts in Grafana?
+18. What is Grafana Loki and how is it used for logging?
+19. What is a Sidecar container?
+20. What are common use cases of Sidecar containers?
+21. What is an Init Container?
+22. Difference between Init container and main container?
+23. What is Eviction Policy in Kubernetes?
+24. Why do pods get evicted?
+25. How do you check logs of a crashed pod?
+26. What is the use of kubectl logs --previous?
+27. How do you troubleshoot a pod crash (CrashLoopBackOff)?
+28. What is Docker and why is it used?
+29. What is a Docker image?
+30. What is a Dockerfile?
+31. How do you troubleshoot a Docker build failure?
+32. What are common Docker issues (auth, daemon, resources)?
+33. What is Terraform?
+34. What are Terraform modules?
+35. How does Terraform help in reusability?
+36. Give an example of reusable Terraform modules (EC2, S3).
+37. What is RBAC in Kubernetes?
+38. What is a Service Account?
+39. How do you control access in Kubernetes?
+40. What is log masking / log filtering?
+41. What are the steps to prepare an application before deployment?
+42. How do you handle dependencies before container startup?
+43. What is a Rolling Update in Kubernetes?
+44. How do you perform updates using Helm charts?

@@ -11,3 +11,10 @@ Your strongest long-term advantage is likely systems reasoning, not speed. That 
 Blunt version: you are not weak, but you are still in the dangerous middle—strong enough to sound confident, not yet strong enough to survive real production ambiguity. The gap is operational judgment.
 
 The right move is not more topics. It is fewer topics with brutal depth.
+
+---------------------------------------------
+> “I’m rebuilding my career toward DevOps/SRE roles and working deeply on cloud infrastructure and systems engineering.”
+
+Short version:
+
+> “Currently transitioning back into IT through DevOps and cloud engineering.”
