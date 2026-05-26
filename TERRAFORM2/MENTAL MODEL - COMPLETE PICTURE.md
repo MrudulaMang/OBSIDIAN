@@ -1,0 +1,1 @@
+![[TERRAFORM FULL MENTAL MAP.png]]
