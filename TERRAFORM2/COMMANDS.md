@@ -1,4 +1,66 @@
 
+| Command                       | What it does                                                                                                                 | When to use                                                        |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `terraform init`              | Initializes the working directory, downloads required providers/modules, and configures the backend using existing settings. | First time running Terraform in a directory or after pulling code. |
+| `terraform init -upgrade`     | Does everything `init` does, but also checks for newer provider/module versions allowed by your version constraints.         | When you want to update providers or modules.                      |
+| `terraform init -reconfigure` | Does everything `init` does, but ignores previously cached backend settings and configures the backend from scratch.         | When backend settings have changed (S3 bucket, key, region, etc.). |
+
+| Command                       | Affects                  |
+| ----------------------------- | ------------------------ |
+| `terraform init -reconfigure` | Backend configuration    |
+| `terraform init -upgrade`     | Provider/module versions |
+
+**`terraform init -reconfigure`**
+
+Purpose: Ignore any previously saved backend configuration and configure the backend again.
+Use it when:
+
+- You changed the backend configuration.
+- You switched from one backend to another (local → S3).
+- You changed S3 bucket, key, region, or DynamoDB lock table.
+- Terraform complains about backend configuration mismatch.
+
+----------------------
+
+
+----------------
+**`terraform init -upgrade`**
+
+Purpose: Download newer versions of providers and modules that satisfy version constraints.
+
+Example:
+
+```
+terraform init -upgrade
+```
+
+Suppose:
+
+```
+required_providers {  aws = {    source  = "hashicorp/aws"    version = "~> 5.0"  }}
+```
+
+You currently have:
+
+```
+5.12.0
+```
+
+A newer version exists:
+
+```
+5.45.0
+```
+
+Running:
+
+```
+terraform init -upgrade
+```
+
+allows Terraform to download the newer version and update `.terraform.lock.hcl`.
+
+Without `-upgrade`, Terraform prefers the version already recorded in the lock file.
 ------------
 [
  Remove-Item -Recurse -Force .terraform

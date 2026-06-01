@@ -1,7 +1,7 @@
-SERVICE - ATTACHED TO
-SG -         EC2 ENI, ALB, RDS, Lambda ENI, etc.
-,NACL -    SUBNET
-, WAF -     ALB, API Gateway, CloudFront, AppSync
+SERVICE -    ATTACHED TO
+SG          -    EC2 ENI, ALB, RDS, Lambda ENI, etc.
+,NACL     -   SUBNET
+, WAF      -   ALB, API Gateway, CloudFront, AppSync
 AWS NETWORK FIREWALL -    Subnets inside a VPC (via firewall endpoints and routing)
 , AWS SHEILD-    Automatically protects AWS infrastructure; enhanced protection can be associated with Elastic IPs, ALBs, CloudFront, Route 53, Global Accelerator
 
