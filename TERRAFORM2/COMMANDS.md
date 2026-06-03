@@ -446,3 +446,77 @@ Senior Terraform work starts at:
 - multi-environment architecture
 
 That distinction matters in interviews and real outages.
+
+------------------------
+terraform console
+	- opens place to apply cmnd to get ouputs of module
+terraform console - opens place to apply cmnd to get ouputs of module
+
+Yes, that's one of its most useful uses.
+
+`terraform console` opens an interactive REPL where you can evaluate Terraform expressions against the current configuration and state.
+
+Example:
+
+```
+terraform console
+```
+
+Then:
+
+```
+> var.environment"dev"> local.name"web-dev"> module.sg
+```
+
+You can inspect module outputs:
+
+```
+> keys(module.sg)[  "security_group_id",  "security_group_name",  "arn"]
+```
+
+Get a specific output:
+
+```
+> module.sg.security_group_id"sg-0123456789abcdef"
+```
+
+Inspect resources in state:
+
+```
+> aws_vpc.main.id"vpc-12345678"
+```
+
+Use functions:
+
+```
+> upper("dev")"DEV"> length(["a","b","c"])3
+```
+
+For troubleshooting modules, a common workflow is:
+
+```
+terraform initterraform applyterraform console
+```
+
+Then:
+
+```
+> keys(module.sg)> module.sg> module.sg.security_group_id
+```
+
+This helps answer questions like:
+
+- What outputs does this module expose?
+- What is the value of a variable/local?
+- What does this expression evaluate to?
+- Why is my `for_each`, `count`, or `lookup` behaving unexpectedly?
+
+One caveat:
+
+```
+> module.sg
+```
+
+only works if Terraform has enough information to evaluate the module outputs (typically after a plan/apply or when values are known from state).
+
+For a DevOps engineer, `terraform console` is often the fastest way to debug expressions without repeatedly editing code and running `terraform plan`.	
