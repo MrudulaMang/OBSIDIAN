@@ -80,10 +80,8 @@ terraform init -upgrade
 ```
 
 Use deletion + `terraform init` when troubleshooting stubborn module issues.
-# terraform fmt -check
-# terraform validate
-
-
+#terraform fmt -check
+#terraform validate
 
 ----terraform init -migrate-state
 	Use this if you intentionally changed backend location and want Terraform to move the existing state there.

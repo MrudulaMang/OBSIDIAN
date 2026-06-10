@@ -48,3 +48,5 @@ ifconfig
 ---
 
 If you want, I can give you a **real production debugging scenario** where checking IP + routes actually saves an outage (this is exactly your target skillset).
+
+----------------
