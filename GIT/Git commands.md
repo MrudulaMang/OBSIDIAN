@@ -4,7 +4,6 @@
 
 ## 🧠 1. Initialize Repository
 
-```bash
 git init
 ```
 
