@@ -33,13 +33,31 @@ Requirements:
 ### Architecture
 
 ```
-Internet    |CloudFront    |ALB    |+----------------+| Frontend EC2   |+----------------+ALB | +------------+------------+------------+ |            |            |Catalogue     User         CartEC2           EC2          EC2        |   Database     RDS
+Internet   
+ |
+ CloudFront    
+ |
+ ALB    
+ |
+ +----------------+
+ | Frontend EC2   |
+ +----------------+
+ ALB 
+ | 
+ +------------+------------+------------+ 
+ |             |            |
+Catalogue     User         CartEC2        
+EC2          EC2        
+|   
+Database   
+  RDS
 ```
 
 ### Team Size
 
 ```
-1 DevOps4 Developers
+1 DevOps
+4 Developers
 ```
 
 ### Infrastructure
@@ -47,13 +65,22 @@ Internet    |CloudFront    |ALB    |+----------------+| Frontend EC2   |+-------
 #### Network
 
 ```
-VPC2 Public Subnets2 Private SubnetsInternet GatewayNAT GatewayRoute Tables
+VPC
+2 Public Subnets
+2 Private Subnets
+Internet Gateway
+NAT Gateway
+Route Tables
 ```
 
 #### Compute
 
 ```
-Frontend EC2 x2Catalogue EC2 x2User EC2 x2Cart EC2 x2Total = 8 EC2
+Frontend EC2 x2
+Catalogue EC2 x2
+User EC2 x2
+Cart EC2 x2
+Total = 8 EC2
 ```
 
 #### Database
@@ -83,7 +110,9 @@ ACM
 #### Monitoring
 
 ```
-CloudWatchCloudWatch AgentSNS Alerts
+CloudWatch
+CloudWatch Agent
+SNS Alerts
 ```
 
 #### Configuration
@@ -104,7 +133,13 @@ Used for:
 ### CI/CD
 
 ```
-GitHub    |GitHub Actions    |Ansible Deploy    |EC2
+GitHub    
+|
+GitHub Actions
+|
+Ansible Deploy
+|
+	EC2
 ```
 
 ---
@@ -114,7 +149,12 @@ GitHub    |GitHub Actions    |Ansible Deploy    |EC2
 Approx:
 
 ```
-8 x t3.medium EC2       $240RDS                     $120ALB                      $25NAT Gateway              $35CloudWatch               $20Total ≈ $440/month
+8 x t3.medium EC2       $240
+RDS                     $120
+ALB                      $25
+NAT Gateway              $35
+CloudWatch               $20
+Total ≈ $440/month
 ```
 
 ---
@@ -160,7 +200,9 @@ Low.
 Most problems look like:
 
 ```
-Disk fullCPU highApplication crashRDS issue
+Disk full
+CPU highApplication crash
+RDS issue
 ```
 
 Easy debugging.
@@ -180,7 +222,9 @@ Launch more EC2Attach to ALB
 Works well until:
 
 ```
-15-20 servicesMultiple teamsHundreds of deployments/day
+15-20 services
+Multiple teams
+Hundreds of deployments/day
 ```
 
 ---
@@ -204,7 +248,8 @@ Internet    |CloudFront    |ALB Ingress    |EKS ClusterFrontend PodsCatalogue Po
 ### Team Size
 
 ```
-2 Platform Engineers5 Developers
+2 Platform Engineers
+5 Developers
 ```
 
 Notice:
@@ -218,13 +263,18 @@ Team requirement already increased.
 #### Network
 
 ```
-VPCPublic SubnetsPrivate SubnetsNAT GatewayRoute Tables
+VPC
+Public Subnets
+Private Subnets
+NAT Gateway
+Route Tables
 ```
 
 #### Kubernetes
 
 ```
-EKS Control Plane3 Worker Nodes
+EKS Control Plane
+3 Worker Nodes
 ```
 
 #### Container Registry
@@ -236,7 +286,9 @@ ECR
 #### Secrets
 
 ```
-Kubernetes SecretsorAWS Secrets Manager
+Kubernetes Secrets
+or
+AWS Secrets Manager
 ```
 
 #### Ingress
@@ -248,13 +300,16 @@ AWS Load Balancer Controller
 #### Monitoring
 
 ```
-PrometheusGrafanaCloudWatch
+Prometheus
+Grafana
+CloudWatch
 ```
 
 #### Logging
 
 ```
-FluentBitCloudWatch Logs
+FluentBit
+CloudWatch Logs
 ```
 
 ---
@@ -262,7 +317,13 @@ FluentBitCloudWatch Logs
 ### CI/CD
 
 ```
-GitHub   |Build Docker Image   |Push ECR   |Deploy EKS
+GitHub   
+|
+Build Docker Image   
+|
+Push ECR   
+|
+Deploy EKS
 ```
 
 ---
@@ -272,7 +333,13 @@ GitHub   |Build Docker Image   |Push ECR   |Deploy EKS
 Approx:
 
 ```
-EKS Control Plane      $753 Worker Nodes        $270ALB                    $25RDS                   $120NAT Gateway            $35Monitoring             $50Total ≈ $575-$700/month
+EKS Control Plane      $753 
+Worker Nodes        $270
+ALB                    $25
+RDS                   $120
+NAT Gateway            $35
+Monitoring             $50
+Total ≈ $575-$700/month
 ```
 
 ---
@@ -330,7 +397,15 @@ Much higher.
 Now failures include:
 
 ```
-Node failurePod failureIngress issueCNI issueDNS issueStorage issueScheduling issueAutoscaling issueContainer issue
+Node failure
+Pod failure
+Ingress issue
+CNI issue
+DNS issue
+Storage issue
+Scheduling issue
+Autoscaling issue
+Container issue
 ```
 
 More moving parts.
@@ -353,25 +428,27 @@ Automatic.
 
 # Executive Comparison
 
-|Area|Terraform+Ansible|Terraform+K8s|
-|---|---|---|
-|Initial Cost|Lower|Higher|
-|Delivery Speed|Faster|Slower|
-|Team Skill Needed|Moderate|High|
-|Debugging|Easier|Harder|
-|Scalability|Medium|Very High|
-|Deployments|Good|Excellent|
-|Operations|Simple|Complex|
-|Learning Value|Moderate|Very High|
-|Small Business Fit|Excellent|Often Overkill|
-|Large SaaS Fit|Weak|Excellent|
+| Area               | Terraform+Ansible | Terraform+K8s  |
+| ------------------ | ----------------- | -------------- |
+| Initial Cost       | Lower             | Higher         |
+| Delivery Speed     | Faster            | Slower         |
+| Team Skill Needed  | Moderate          | High           |
+| Debugging          | Easier            | Harder         |
+| Scalability        | Medium            | Very High      |
+| Deployments        | Good              | Excellent      |
+| Operations         | Simple            | Complex        |
+| Learning Value     | Moderate          | Very High      |
+| Small Business Fit | Excellent         | Often Overkill |
+| Large SaaS Fit     | Weak              | Excellent      |
 
 ---
 
 If I were a consultant hired by a company expecting:
 
 ```
-5 services500 concurrent users5 developers
+5 services
+500 concurrent users
+5 developers
 ```
 
 I would recommend:
@@ -385,13 +462,19 @@ and **not Kubernetes**.
 If I were hired by a company expecting:
 
 ```
-25+ microservicesMultiple product teamsContinuous deploymentsRapid growth
+25+ microservices
+Multiple product teams
+Continuous deployments
+Rapid growth
 ```
 
 I would recommend:
 
 ```
-AWSTerraformDockerKubernetes
+AWS
+Terraform
+Docker
+Kubernetes
 ```
 
 from day one.

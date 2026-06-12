@@ -69,3 +69,68 @@ Security Group = Who can talk to this resource?NACL = What traffic is allowed in
 ```
 
 That mental model works well in both interviews and troubleshooting.
+
+------------------------------------------------------------------------
+
+what will be the outbound rule in nacl for catlagoue to mongo
+
+Assume:
+
+```
+Catalogue EC2  ---> MongoDB EC2MongoDB Port = 27017
+```
+
+When Catalogue initiates the connection:
+
+```
+Source IP   = CatalogueSource Port = 49152 (ephemeral)Dest IP     = MongoDBDest Port   = 27017
+```
+
+For the Catalogue subnet NACL:
+
+Outbound rule must allow:
+
+```
+Destination: MongoDB subnet CIDRProtocol: TCPPort: 27017ALLOW
+```
+
+Because Catalogue is sending traffic to MongoDB's listening port 27017.
+
+Now look at the return traffic:
+
+```
+Source IP   = MongoDBSource Port = 27017Dest IP     = CatalogueDest Port   = 49152
+```
+
+Since NACLs are stateless, the Catalogue subnet must also allow inbound return traffic:
+
+```
+Source: MongoDB subnet CIDRProtocol: TCPPort: 1024-65535 (ephemeral ports)ALLOW
+```
+
+And the MongoDB subnet NACL must allow:
+
+Inbound:
+
+```
+Source: Catalogue subnet CIDRTCP 27017ALLOW
+```
+
+Outbound (return traffic):
+
+```
+Destination: Catalogue subnet CIDRTCP 1024-65535ALLOW
+```
+
+This is the part many people miss:
+
+Security Groups are stateful, so only allowing 27017 inbound on MongoDB SG is usually enough.
+
+NACLs are stateless, so you must explicitly allow:
+
+- Request traffic (to 27017)
+- Response traffic (to ephemeral ports 1024–65535)
+
+For an interview, the concise answer is:
+
+> Catalogue subnet outbound NACL: allow TCP 27017 to MongoDB subnet. Since NACLs are stateless, the corresponding inbound rule on the Catalogue subnet must allow ephemeral ports (1024–65535) for the return traffic from MongoDB.
