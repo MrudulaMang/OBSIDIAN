@@ -1,4 +1,8 @@
 Good topic — this trips up a lot of people. Let me break it down layered.
+- containers cannot comunicate each other in default bridge network by name, they communicate only with ip, but ip's are stateless
+- need to create our own network to communicate with container name
+- host networkis not secure and cannot use same port multiple times
+
 
 ---
 INTERVIEW ANSWER
