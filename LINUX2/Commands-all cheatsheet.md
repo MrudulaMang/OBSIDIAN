@@ -33,3 +33,11 @@
 |Incident Response (First Commands)|`uptime`, `top`, `free -h`, `df -h`, `lsblk`, `ps aux`, `ss -tulpn`, `systemctl status`, `journalctl -xe`, `curl`, `dig`|
 
 If you want a **true Production/SRE one-sheet**, I'd shrink the entire list to the **50 commands that solve 90% of real incidents**. That's the sheet senior engineers actually keep in their heads.
+
+ *️lsof - Find which process is holding a port or file  
+*️⃣ss - Inspect active network connections and listening ports  
+*️⃣strace - See what a process is doing under the hood  
+*️⃣tcpdump - Capture and analyze network traffic in real time  
+*️⃣vmstat - Quickly identify CPU, memory, and system bottlenecks  
+*️⃣ iostat - Detect storage and disk I/O issues  
+*️⃣ journalctl - Investigate service failures and system events
