@@ -138,9 +138,6 @@ If you want, I can also give you a brutally realistic assessment of:
     
 - Gaps between you and a ₹30+ LPA senior engineer.
     
-
-  
-
 A week is enough to make a noticeable jump in interview performance. It is not enough to become a true senior engineer. Seniority comes from years of production exposure, outages, ownership, and trade-off decisions.
 
 What you can do in 7 days is learn to think and answer like a senior engineer using the tools you already know.
