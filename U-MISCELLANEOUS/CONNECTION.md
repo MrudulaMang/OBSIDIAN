@@ -1,4 +1,4 @@
-so i used nslookup ping telnet curl list what else u suggested i missed here
+So i used nslookup ping telnet curl list what else u suggested i missed here
 
 Nice — this is exactly how you should think:
 
