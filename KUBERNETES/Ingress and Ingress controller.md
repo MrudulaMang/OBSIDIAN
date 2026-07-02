@@ -1,0 +1,1 @@
+using kind ingress u can define incoming traffic 
