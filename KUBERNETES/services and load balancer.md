@@ -4,6 +4,8 @@ if i create multiple services with type lb, will aws create multiple lb's
   
 Yes — in most standard Kubernetes setups on AWS (like Amazon EKS or self-managed K8s on AWS cloud), **each Service of type `LoadBalancer` usually creates its own separate AWS Load Balancer**.
 
+to remove alb created in aws, just change servie type to NODEPORT instead of LOAD BALANCER
+
 ### Example
 
 If you create:
