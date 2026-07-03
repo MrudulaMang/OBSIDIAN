@@ -1,0 +1,4 @@
+- **`git fork`** creates a **copy of a repository on your GitHub (or GitLab, etc.) account**, letting you propose changes without write access to the original repo.
+- **`git clone`** creates a **local copy of any Git repository** (your own or someone else’s) on your machine for development, used when we dont need to do any changes in the main repo, just to the repo for ourself.
+
+One common mistake is committing directly to the `main` branch of your fork. Creating a separate feature branch, as you're describing, is the recommended practice because it keeps your fork's `main` aligned with the upstream repository and makes future contributions easier.
