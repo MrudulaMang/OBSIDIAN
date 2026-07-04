@@ -12,10 +12,19 @@ Temporary credentials are more secure because they expire automatically.
 ### How STS works with IRSA
 
 When a pod starts in EKS:
-
-```
-Pod   ↓Service Account   ↓OIDC Token   ↓AWS STS   ↓AssumeRoleWithWebIdentity   ↓Temporary Credentials   ↓S3 / DynamoDB / SQS
-```
+Pod
+   ↓
+Service Account
+   ↓
+OIDC Token
+   ↓
+AWS STS
+   ↓
+AssumeRoleWithWebIdentity
+   ↓
+Temporary Credentials
+   ↓
+S3 / DynamoDB / SQS```
 
 The pod never stores permanent AWS keys.
 

@@ -28,15 +28,11 @@ When you create eks cluster by default oidc issuer url is generated.
 ## 🔑 What you still need to do
 
 You must explicitly run:
-
 eksctl utils associate-iam-oidc-provider --cluster <cluster-name> --approve
-
 This step:
-
 👉 Registers that OIDC issuer **inside AWS IAM**
 
 ## 🔑 What it actually does
-
 It connects your Kubernetes cluster to AWS IAM using **OIDC (OpenID Connect)** so that **pods can assume IAM roles securely**.
 
 👉 In simple terms:

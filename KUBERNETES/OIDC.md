@@ -4,7 +4,7 @@
 > eksctl utils asscociate-iam-oidc-provider --cluster $cluster_name --approve
 >   --oidc is associated to my cluster
 > create a policy which should have permission related to elb, createa iam role and attach it to alb controller  
->  ---- curl.... github ,  iam_policy dowload for aws lbs controller
+>  ---- curl.... github ,  iam_policy dowload for aws lb controller
 >    ---- create policy in aws: > aws iam create-policy.... with dowloaded policy.json
 >    assign iam role to service account
 >      --- eksctl create iamserviceaccount
