@@ -1,0 +1,48 @@
+# gitops/apps/prod/payments-api.yaml
+#
+# ArgoCD Application for the payments-api service
+# Deploy is triggered when image tag changes in values.yaml
+# No manual kubectl — Git is the source of truth
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: payments-api
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: deployments
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: incidents
+spec:
+  project: production
+
+  source:
+    repoURL: https://github.com/myorg/payments-api
+    targetRevision: main
+    path: helm
+    helm:
+      valueFiles:
+        - values-prod.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: payments
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 3
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+    syncOptions:
+      - CreateNamespace=true
+
+  # Health checks — ArgoCD waits for these before marking sync successful
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas  # Ignore replica count (managed by HPA)

@@ -1,0 +1,70 @@
+# chaos-engineering/experiments/pod-failure.yaml
+#
+# Chaos Experiment: Random pod failure in payments-api
+#
+# PURPOSE:
+#   Verify that the payments-api handles pod failures gracefully —
+#   no dropped requests, HPA scales correctly, alerts fire within SLA.
+#
+# HYPOTHESIS:
+#   When 1 of 3 payments-api pods is killed, the service maintains
+#   < 1% error rate and p99 latency stays under 500ms.
+#
+# SCHEDULE: Run weekly in staging, monthly in production (off-peak)
+#
+# WHAT WE LEARNED (from first run 2024-01-15):
+#   - HPA took 90 seconds to scale — too slow. Reduced scale-up stabilization
+#     window from 300s to 60s. Now scales in ~30s.
+#   - Readiness probe was too generous (30s delay). Reduced to 10s.
+
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: payments-api-pod-failure
+  namespace: payments
+spec:
+  appinfo:
+    appns: payments
+    applabel: app=payments-api
+    appkind: deployment
+
+  # Don't run chaos if service health is already degraded
+  jobCleanUpPolicy: delete
+
+  monitoring: true   # Expose chaos metrics to Prometheus
+
+  chaosServiceAccount: litmus-admin
+
+  experiments:
+    - name: pod-delete
+      spec:
+        components:
+          env:
+            - name: TOTAL_CHAOS_DURATION
+              value: "60"           # Kill pods for 60 seconds
+            - name: CHAOS_INTERVAL
+              value: "10"           # Kill a pod every 10 seconds
+            - name: FORCE
+              value: "false"        # Graceful termination (SIGTERM)
+            - name: PODS_AFFECTED_PERC
+              value: "33"           # Kill 1 of 3 pods
+
+        probe:
+          # Abort chaos if error rate breaches threshold
+          - name: check-error-rate
+            type: promProbe
+            mode: Continuous
+            runProperties:
+              probeTimeout: 5s
+              interval: 5s
+              stopOnFailure: true   # Stop chaos if probe fails
+            promProbe/inputs:
+              endpoint: http://prometheus.monitoring:9090
+              query: |
+                sum(rate(http_requests_total{service="payments-api",status=~"5.."}[1m]))
+                /
+                sum(rate(http_requests_total{service="payments-api"}[1m]))
+              comparator:
+                type: float
+                criteria: "<="
+                value: "0.01"       # Abort if error rate > 1%

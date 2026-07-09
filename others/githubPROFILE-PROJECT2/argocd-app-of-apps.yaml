@@ -1,0 +1,30 @@
+# gitops/clusters/prod/app-of-apps.yaml
+#
+# ArgoCD "App of Apps" pattern
+# One root application manages all other applications
+# Any new service added to gitops/apps/ is automatically picked up
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/myorg/aws-production-platform
+    targetRevision: main
+    path: gitops/apps/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true       # Remove resources deleted from Git
+      selfHeal: true    # Revert manual kubectl changes
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
