@@ -53,7 +53,10 @@ Container A cannot see Container B's processes.Container A has its own network v
 ### cgroups = Resource Control
 
 ```
-Container A gets 1 CPUContainer A gets 512 MB RAMContainer B gets 2 CPUsContainer B gets 2 GB RAM
+Container A gets 1 CPU
+Container A gets 512 MB RAM
+Container B gets 2 CPUs
+Container B gets 2 GB RAM
 ```
 
 ---
