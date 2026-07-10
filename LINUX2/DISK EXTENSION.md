@@ -1,3 +1,141 @@
+### LVM and Filesystem Summary
+
+#### Storage hierarchy
+
+```
+Disk
+│
+└── Physical Volume (PV)
+    │
+    └── Volume Group (VG) - RootVG
+        │
+        ├── Logical Volume (LV) - rootVol
+        ├── Logical Volume (LV) - homeVol
+        └── Logical Volume (LV) - varVol
+```
+
+Each **Logical Volume (LV)** usually contains **one filesystem**.
+
+Example:
+
+```
+/dev/mapper/RootVG-homeVol
+        │
+        ▼
+   XFS Filesystem
+        │
+        ▼
+ Mounted at /home
+```
+
+---
+
+### Difference between the commands
+
+#### 1. Extend the Logical Volume
+
+```
+lvextend -L+30G /dev/mapper/RootVG-homeVol
+```
+
+- Operates on the **Logical Volume (LV)**.
+- `/dev/mapper/RootVG-homeVol` is the **block device**.
+- Increases the storage size of the LV.
+- Does **not** automatically expand the filesystem (unless `-r` is used).
+
+---
+
+#### 2. Extend the Filesystem (XFS)
+
+```
+xfs_growfs /home
+```
+
+- Operates on the **filesystem**.
+- `/home` is the **mount point**.
+- Expands the XFS filesystem to use the newly available space.
+- XFS uses the **mounted filesystem**, so you provide the mount point rather than the device.
+
+---
+
+### What does `-r` do?
+
+```
+lvextend -r -L+30G /dev/mapper/RootVG-homeVol
+```
+
+`-r` means **resize the filesystem automatically** after extending the LV.
+
+Internally it performs:
+
+```
+lvextend -L+30G /dev/mapper/RootVG-homeVol
+xfs_growfs /home
+```
+
+So if you use `-r`, you **do not need** to run `xfs_growfs` separately.
+
+---
+
+### How many filesystems are in `/dev/mapper/RootVG-homeVol`?
+
+**One.**
+
+```
+/dev/mapper/RootVG-homeVol
+        │
+        ▼
+     One XFS Filesystem
+        │
+        ▼
+      Mounted at /home
+```
+
+Inside that filesystem, there can be many directories and files:
+
+```
+/home
+├── user1
+├── user2
+├── Documents
+└── Downloads
+```
+
+These are **directories**, **not** separate filesystems.
+
+---
+
+### Example with multiple Logical Volumes
+
+```
+RootVG
+├── rootVol  → XFS → /
+├── homeVol  → XFS → /home
+├── varVol   → XFS → /var
+└── optVol   → XFS → /opt
+```
+
+- **4 Logical Volumes**
+- **4 Filesystems**
+- **4 Mount Points**
+
+---
+
+### Key points to remember
+
+- **PV (Physical Volume):** Created from a disk or partition.
+- **VG (Volume Group):** Pool of storage created from one or more PVs.
+- **LV (Logical Volume):** Virtual partition created from the VG.
+- **Filesystem (XFS/ext4):** Created on an LV.
+- **Mount Point:** Directory where the filesystem is accessible (e.g., `/home`, `/var`, `/`).
+
+**Rule of thumb:**
+
+> **One Logical Volume → One Filesystem → One Mount Point**
+
+This is the standard layout used in most Linux systems.
+
+-------------------------------
 growpart /dev/nvme0n1 4
 lvextend -r -L+30G /dev/mapper/RootVG-homeVol
 xfs_growfs /home
